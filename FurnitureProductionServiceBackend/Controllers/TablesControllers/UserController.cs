@@ -40,6 +40,20 @@ namespace FurnitureProductionServiceBackend.Controllers
             return Ok(userDto);
         }
 
+        [HttpGet("{name}")]
+        //[Authorize(Roles = "Admin, Logistician")] 
+        public async Task<IActionResult> GetByName(string name)
+        {
+            var user = await _userRepository.GetByUsernameAsync(name);
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            var userDto = _mapper.Map<UserDto>(user);
+            return Ok(userDto);
+        }
+
         [HttpPost]
         //[Authorize(Roles = "Admin")] 
         public async Task<IActionResult> Create([FromBody] UserCreateDto userDto)

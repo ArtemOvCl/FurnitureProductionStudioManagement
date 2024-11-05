@@ -20,6 +20,7 @@ public class ClassificatorController<T, TDto> : ControllerBase where T : class, 
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
+
         var entities = await _repository.GetAllAsync();
         var dtos = _mapper.Map<IEnumerable<TDto>>(entities);
         return Ok(dtos);
@@ -35,9 +36,10 @@ public class ClassificatorController<T, TDto> : ControllerBase where T : class, 
     }
 
     [HttpPost]
-    [Authorize(Policy = "RequireLogisticianRole")]
+    [Authorize(Policy = "RequireAdminRole")]
     public async Task<IActionResult> Create(TDto dto)
     {
+
         var entity = _mapper.Map<T>(dto);
         await _repository.AddAsync(entity);
         return CreatedAtAction(nameof(GetById), new { id = entity.Id }, dto);

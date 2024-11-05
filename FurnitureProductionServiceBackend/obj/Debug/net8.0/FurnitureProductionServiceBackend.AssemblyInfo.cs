@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FurnitureProductionServiceBackend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+83174d883ed12ea0ed89c3a9e1ee80bac0787345")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1c61389af90a317b81da3bf5bb67e34deb3592a7")]
 [assembly: System.Reflection.AssemblyProductAttribute("FurnitureProductionServiceBackend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FurnitureProductionServiceBackend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

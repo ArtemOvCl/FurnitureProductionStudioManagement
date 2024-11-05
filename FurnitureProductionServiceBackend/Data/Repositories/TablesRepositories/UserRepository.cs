@@ -29,6 +29,12 @@ namespace FurnitureProductionServiceBackend.Repositories
             return await _context.Users.FindAsync(id);
         }
 
+        public async Task<User> GetByUsernameAsync(string username)
+        {
+            return await _context.Users.Include(u => u.Role)
+                                       .FirstOrDefaultAsync(u => u.Name == username);
+        }
+
         public async Task AddAsync(User user)
         {
             
