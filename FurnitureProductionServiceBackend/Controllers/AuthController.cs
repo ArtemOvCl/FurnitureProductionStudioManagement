@@ -22,7 +22,7 @@ namespace FurnitureProductionServiceBackend.Controllers
             var authResponse = await _authRepository.LoginAsync(loginDto);
             if (!authResponse.Success)
             {
-                return Unauthorized(authResponse.Message);
+                return Unauthorized(new { message = authResponse.Message });
             }
 
             return Ok(new { Token = authResponse.Token });

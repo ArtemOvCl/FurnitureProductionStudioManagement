@@ -11,6 +11,18 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var corsOrigins = builder.Configuration.GetSection("CorsOrigins").Get<string[]>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngularApp", policy =>
+    {
+        policy.WithOrigins(corsOrigins) 
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 builder.Services.AddDbContext<FurnitureProductionContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("FurnitureProductionDatabase")));
 
@@ -83,6 +95,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseCors("AllowAngularApp");
 
 app.MapControllers();
 
