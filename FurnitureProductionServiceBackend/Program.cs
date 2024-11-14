@@ -29,6 +29,7 @@ builder.Services.AddDbContext<FurnitureProductionContext>(options =>
 builder.Services.AddScoped(typeof(IClassificatorRepository<>), typeof(ClassificatorRepository<>));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<IManufactureRepository, ManufactureRepository>();
 
 builder.Services.AddControllers();
 

@@ -1,15 +1,84 @@
-<div>
-  <h2>Login</h2>
-  <form (submit)="login()">
-    <div>
-      <label for="name">Username</label>
-      <input type="text" id="name" [(ngModel)]="name" name="name" required>
-    </div>
-    <div>
-      <label for="password">Password</label>
-      <input type="password" id="password" [(ngModel)]="password" name="password" required>
-    </div>
-    <div *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</div>
-    <button type="submit">Login</button>
-  </form>
+<div class="flex flex-col items-center justify-center min-h-screen bg-beige relative animated-background font-raleway">
+  
+  <div class="fixed top-0 text-center mt-4 w-full">
+    <h2 class="text-4xl font-bold text-green-dark-800 mt-4 md:text-3xl sm:text-2xl">
+      FURNITURES PRODUCTION <br> MANAGEMENT STUDIO
+    </h2>
+    <img src="/assets/images/convenient.svg" alt="Icon" class="mx-auto w-16 h-16 mt-2">
+  </div>
+
+  <div class="w-full max-w-md p-8 rounded-xxl mt-40">
+    <h1 class="text-3xl font-bold text-center text-green-dark-800 mb-4">Welcome!</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="space-y-8">
+      
+      <div class="relative">
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          required
+          placeholder=" "
+          class="w-full border-b-2 border-green-dark-400 text-green-dark-800 placeholder-transparent bg-transparent focus:outline-none focus:border-green-light p-2"
+          [ngClass]="{'border-red-500': loginForm.get('name')?.touched && loginForm.get('name')?.invalid}"
+        />
+        <label for="name" class="floating-label">Full Name</label>
+
+        <div *ngIf="loginForm.get('name')?.touched && loginForm.get('name')?.invalid" class="absolute left-0 -bottom-5 text-red-500 text-sm">
+          <span *ngIf="loginForm.get('name')?.errors?.['required']">This field is required.</span>
+        </div>
+        <div *ngIf="loginForm.get('name')?.errors?.['serverError']" class="text-red-500 text-sm mt-1">
+          {{ loginForm.get('name')?.errors?.['serverError'] }}
+        </div>
+      </div>
+
+      <!-- Password Input -->
+      <div class="relative">
+        <input
+          [type]="hidePassword ? 'password' : 'text'"
+          id="password"
+          formControlName="password"
+          required
+          placeholder=" "
+          class="peer w-full border-b-2 border-green-dark-400 text-green-dark-800 placeholder-transparent bg-transparent focus:outline-none focus:border-green-light p-2"
+          [ngClass]="{'border-red-500': loginForm.get('password')?.touched && loginForm.get('password')?.invalid}"
+        />
+        <label for="password" class="floating-label">Password</label>
+        
+        <button
+          type="button"
+          (click)="togglePasswordVisibility()"
+          class="absolute right-0 top-0 mt-2 mr-2 text-green-dark-400 hover:text-green-dark-800 focus:outline-none"
+        >
+          {{ hidePassword ? '👀' : '🔒' }}
+        </button>
+
+        <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" class="absolute left-0 -bottom-5 text-red-500 text-sm">
+          <span *ngIf="loginForm.get('password')?.errors?.['required']">This field is required.</span>
+        </div>
+        <div *ngIf="loginForm.get('password')?.errors?.['serverError']" class="text-red-500 text-sm mt-1">
+          {{ loginForm.get('password')?.errors?.['serverError'] }}
+        </div>
+      </div>
+
+      <!-- General Error Message -->
+      <div *ngIf="generalErrorMessage" class="text-red-500 text-sm text-center">
+        {{ generalErrorMessage }}
+      </div>
+
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        class="w-full py-2 px-4 bg-green-dark-800 text-white font-semibold rounded hover:bg-green-dark-400 transition duration-200 mt-8"
+      >
+        <span *ngIf="!isLoading">Login</span>
+        <span *ngIf="isLoading" class="flex items-center justify-center">
+          <svg class="w-5 h-5 text-white animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+          </svg>
+        </span>
+      </button>
+
+    </form>
+  </div>
 </div>

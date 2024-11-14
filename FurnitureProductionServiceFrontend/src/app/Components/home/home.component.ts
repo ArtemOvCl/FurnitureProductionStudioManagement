@@ -14,21 +14,24 @@ export class HomeComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    this.isAuthenticated = this.authService.isLoggedIn();
-
-    if (!this.isAuthenticated) {
-      this.router.navigate(['/login']);
-    } else {
-
-      const token = sessionStorage.getItem('token'); 
-
-      if (token) {
-
-        this.tokenPayload = jwtDecode(token);
-        console.log(this.tokenPayload); 
+    if (typeof window !== 'undefined' && typeof sessionStorage !== 'undefined') {
+      this.isAuthenticated = this.authService.isLoggedIn();
+  
+      if (!this.isAuthenticated) {
+        this.router.navigate(['/login']);
+      } else {
+        const token = sessionStorage.getItem('token');
+  
+        if (token) {
+          this.tokenPayload = jwtDecode(token);
+          console.log(this.tokenPayload);
+        }
       }
+    } else {
+      console.warn('sessionStorage is not available on the server side.');
     }
   }
+  
 
   logout() {
     this.authService.logout();

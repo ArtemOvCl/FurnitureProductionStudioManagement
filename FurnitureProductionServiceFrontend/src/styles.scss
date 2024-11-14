@@ -1,1 +1,42 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.animated-background {
+    background: linear-gradient(135deg, #faf0e6, #E2EBF0, #faf0e6);
+    background-size: 200% 200%;
+    animation: gradient-animation 10s ease infinite;
+}
+
+@keyframes gradient-animation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+}
+
+.floating-label {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    color: #172621;
+    pointer-events: none;
+    transition: all 0.2s ease-in-out;
+    padding-left: 0.5rem;
+  }
+  
+  input:focus + .floating-label,
+  input:not(:placeholder-shown) + .floating-label {
+    top: 0;
+    transform: translateY(-60%);
+    font-size: 0.75rem;
+    color: #3B593F; 
+  }
+
+

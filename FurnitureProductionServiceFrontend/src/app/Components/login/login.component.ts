@@ -1,42 +1,85 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 import { AuthDto } from '../../DTOs/AuthDTO';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { finalize } from 'rxjs/operators';
+import { ErrorResponse } from '../../Interfaces/error-response';
 
 @Component({
   selector: 'app-login',
   standalone: true, 
-  imports: [FormsModule, CommonModule],
-  templateUrl: './login.component.html'
+  imports: [ReactiveFormsModule, CommonModule],
+  templateUrl: './login.component.html',
+  styleUrls: [] 
 })
-export class LoginComponent {
-  name: string = '';
-  password: string = '';
-  errorMessage: string = '';
+export class LoginComponent implements OnInit {
+  loginForm!: FormGroup; 
+  generalErrorMessage: string = '';
+  isLoading: boolean = false; 
+  hidePassword: boolean = true;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService, 
+    private router: Router, 
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit() {
-
     if (this.authService.isLoggedIn()) {
       this.router.navigate(['/home']);
     }
+
+    this.loginForm = this.fb.group({
+      name: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
+
+  togglePasswordVisibility() {
+    this.hidePassword = !this.hidePassword;
   }
 
   login() {
-    this.authService.login({ name: this.name, password: this.password })
+
+    if (this.loginForm.invalid || this.isLoading) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
+
+    const loginData = this.loginForm.value;
+    this.isLoading = true; 
+
+    this.authService.login(loginData)
+      .pipe(
+        finalize(() => {
+          this.isLoading = false; 
+        })
+      )
       .subscribe({
         next: (response: AuthDto) => {
           sessionStorage.setItem('token', response.token);
           this.router.navigate(['/home']);
         },
-        error: (error) => {
-          
-          this.errorMessage = error.error.message || "Enter your name and password";
-        }
+        error: (error) => this.handleError(error)
       });
   }
-  
+
+  private handleError(error: any) {
+    const errorData = error?.error as ErrorResponse;
+
+    if (errorData?.errors) {
+
+      Object.keys(errorData.errors).forEach(field => {
+        const control = this.loginForm.get(field);
+        if (control) {
+          control.setErrors({ serverError: errorData.errors![field][0] });
+        }
+      });
+    }
+
+    this.generalErrorMessage = errorData?.message ?? '';
+  }
 }
+

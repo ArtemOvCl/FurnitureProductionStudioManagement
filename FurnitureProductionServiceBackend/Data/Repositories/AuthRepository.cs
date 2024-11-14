@@ -7,6 +7,7 @@ using FurnitureProductionServiceBackend.DTOs;
 using FurnitureProductionServiceBackend.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using System.Collections.Generic;
 
 namespace FurnitureProductionServiceBackend.Repositories
 {
@@ -23,15 +24,43 @@ namespace FurnitureProductionServiceBackend.Repositories
 
         public async Task<AuthResponseDto> LoginAsync(UserLoginDto loginDto)
         {
+            var response = new AuthResponseDto { Success = false };
+            var errors = new Dictionary<string, List<string>>();
+
+            // Перевірка, чи всі необхідні поля заповнені
+            if (string.IsNullOrWhiteSpace(loginDto.Name))
+            {
+                errors.Add("name", new List<string> { "Full Name is required." });
+            }
+
+            if (string.IsNullOrWhiteSpace(loginDto.Password))
+            {
+                errors.Add("password", new List<string> { "Password is required." });
+            }
+
+            if (errors.Count > 0)
+            {
+                response.Errors = errors;
+                return response;
+            }
+
             var user = await _userRepository.GetByUsernameAsync(loginDto.Name);
             if (user == null)
             {
-                return new AuthResponseDto { Success = false, Message = "User not found." };
+                errors.Add("name", new List<string> { "User not found." });
+            }
+            else
+            {
+                if (!BCrypt.Net.BCrypt.Verify(loginDto.Password, user.Password))
+                {
+                    errors.Add("password", new List<string> { "Invalid password." });
+                }
             }
 
-            if (!BCrypt.Net.BCrypt.Verify(loginDto.Password, user.Password))
+            if (errors.Count > 0)
             {
-                return new AuthResponseDto { Success = false, Message = "Invalid password." };
+                response.Errors = errors;
+                return response;
             }
 
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -42,7 +71,7 @@ namespace FurnitureProductionServiceBackend.Repositories
                 {
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                     new Claim(ClaimTypes.Name, user.Name),
-                    new Claim(ClaimTypes.Role, user.Role.RoleName) 
+                    new Claim(ClaimTypes.Role, user.Role.RoleName)
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(Convert.ToDouble(_configuration["Jwt:ExpiresInMinutes"])),
                 Issuer = _configuration["Jwt:Issuer"],
@@ -52,7 +81,9 @@ namespace FurnitureProductionServiceBackend.Repositories
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            return new AuthResponseDto { Success = true, Token = tokenHandler.WriteToken(token) }; 
+            response.Success = true;
+            response.Token = tokenHandler.WriteToken(token);
+            return response;
         }
     }
 }
