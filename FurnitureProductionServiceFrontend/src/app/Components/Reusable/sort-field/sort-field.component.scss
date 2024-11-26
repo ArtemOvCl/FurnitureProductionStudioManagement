@@ -1,0 +1,21 @@
+.sort-button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background-color: #606C38; 
+    cursor: pointer;
+    font-size: 16px;
+  
+    .sort-icon {
+      width: 15px;
+      height: 15px;
+    }
+  
+    &:hover {
+      background-color: #4b5c28;
+    }
+  }
+  

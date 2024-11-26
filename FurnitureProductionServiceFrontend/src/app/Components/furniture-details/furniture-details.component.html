@@ -1,0 +1,33 @@
+<div class="furniture-details">
+  <button class="exit-button" (click)="exit()" aria-label="Exit">
+    ⟵ Back
+  </button>
+
+  <div *ngIf="furniture; else loading">
+    <h1>{{ furniture.name }}</h1>
+    <p><strong>Description:</strong> {{ furniture.description }}</p>
+    <p><strong>Collection ID:</strong> {{ furniture.furnitureCollectionId }}</p>
+    <p><strong>Depth:</strong> {{ furniture.depth }}</p>
+    <p><strong>Width:</strong> {{ furniture.width }}</p>
+    <p><strong>Length:</strong> {{ furniture.length }}</p>
+    <p><strong>Weight:</strong> {{ furniture.weight }}</p>
+    <p><strong>Maximum Load:</strong> {{ furniture.maximumLoad }}</p>
+    <p><strong>Cost:</strong> {{ furniture.cost | currency:'UAH' }}</p>
+
+    <div class="currency-conversion">
+      <h3>Cost in other currencies:</h3>
+      <p>USD: {{ furniture.cost | currencyConverter:'USD' }}</p>
+      <p>EUR: {{ furniture.cost | currencyConverter:'EUR' }}</p>
+      <p>GBP: {{ furniture.cost | currencyConverter:'GBP' }}</p>
+    </div>
+
+    <p *ngIf="furniture.imagePath">
+      <strong>Image:</strong>
+      <img [src]="furniture.imagePath" alt="{{ furniture.name }}" />
+    </p>
+  </div>
+
+  <ng-template #loading>
+    <p>Loading furniture details...</p>
+  </ng-template>
+</div>

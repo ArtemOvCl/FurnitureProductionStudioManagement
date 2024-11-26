@@ -1,12 +1,13 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace FurnitureProductionServiceBackend.Models
 {
     public class Furniture
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public string? Name { get; set; }
+        public string? Description { get; set; }
         public int FurnitureCollectionId { get; set; }
         public double Depth { get; set; }
         public double Width { get; set; }
@@ -14,9 +15,11 @@ namespace FurnitureProductionServiceBackend.Models
         public double Weight { get; set; }
         public double MaximumLoad { get; set; }
         public decimal Cost { get; set; }
-
+        public string? ImagePath { get; set; }
+        
         public virtual FurnitureCollection? FurnitureCollection { get; set; } 
-        public virtual ICollection<Material> Materials { get; set; }
+
+        public virtual ICollection<Material>? Materials { get; set; }
 
         
     }

@@ -1,0 +1,47 @@
+.furniture-details {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+  
+    p {
+      margin: 5px 0;
+    }
+  
+    .exit-button {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #606c38;
+  
+      &:hover {
+        color: #2d6a4f;
+      }
+    }
+  
+    .currency-conversion {
+      margin-top: 20px;
+  
+      h3 {
+        margin-bottom: 10px;
+      }
+  
+      p {
+        margin: 3px 0;
+      }
+    }
+  
+    img {
+      max-width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  }
+  

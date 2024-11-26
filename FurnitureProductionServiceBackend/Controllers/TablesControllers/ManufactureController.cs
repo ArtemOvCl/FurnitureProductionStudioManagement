@@ -44,6 +44,8 @@ namespace FurnitureProductionServiceBackend.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] ManufactureDto manufactureDto)
         {
+
+            Console.WriteLine("Okay");
             var manufacture = _mapper.Map<Manufacture>(manufactureDto);
             await _manufactureRepository.AddAsync(manufacture);
             var createdDto = _mapper.Map<ManufactureDto>(manufacture);
@@ -62,7 +64,8 @@ namespace FurnitureProductionServiceBackend.Controllers
             _mapper.Map(manufactureDto, existingManufacture);
             await _manufactureRepository.UpdateAsync(existingManufacture);
 
-            return NoContent();
+            var updatedDto = _mapper.Map<ManufactureDto>(existingManufacture);
+            return Ok(updatedDto);
         }
 
         [HttpDelete("{id}")]

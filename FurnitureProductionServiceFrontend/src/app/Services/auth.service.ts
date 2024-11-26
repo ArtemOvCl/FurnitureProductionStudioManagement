@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { AuthDto } from '../DTOs/AuthDTO';
+import { AuthDto } from '../Interfaces/auth-item';
+import { LoginDto } from '../Interfaces/login-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(loginDto: { name: string; password: string }): Observable<AuthDto> {
+  login(loginDto: LoginDto): Observable<AuthDto> {
+    
     return this.http.post<AuthDto>(`${this.apiUrl}/login`, loginDto).pipe(
       tap((response: AuthDto) => {
         sessionStorage.setItem('token', response.token);

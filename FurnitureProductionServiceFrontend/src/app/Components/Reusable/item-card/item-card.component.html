@@ -1,0 +1,20 @@
+<div class="furniture-card">
+  <div class="actions-top">
+    <button class="action-button" *appShowForRole="['Admin']" (click)="onEdit()">
+      <img src="assets/icons/edit.png" alt="Edit" />
+    </button>
+    <button class="action-button" *appShowForRole="['Admin']" (click)="onDelete()">
+      <img src="assets/icons/delete.png" alt="Delete" />
+    </button>
+  </div>
+  <img [src]="data.imagePath" alt="{{ data.name }}" class="furniture-image" />
+  <div class="details">
+    <div class="text-details">
+      <p class="furniture-name">{{ data.name }}</p>
+      <p class="furniture-price">{{ data.cost }} UAH</p>
+    </div>
+    <button class="action-button details-button" (click)="onDetails()">
+      <img src="assets/icons/info.png" alt="Details" />
+    </button>
+  </div>
+</div>

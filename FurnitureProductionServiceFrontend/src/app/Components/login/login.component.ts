@@ -1,24 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
-import { AuthDto } from '../../DTOs/AuthDTO';
+import { AuthDto } from '../../Interfaces/auth-item';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 import { finalize } from 'rxjs/operators';
 import { ErrorResponse } from '../../Interfaces/error-response';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true, 
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
-  styleUrls: [] 
+  styleUrls: ['./login.component.scss'] 
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit{
   loginForm!: FormGroup; 
-  generalErrorMessage: string = '';
-  isLoading: boolean = false; 
-  hidePassword: boolean = true;
+  generalErrorMessage = '';
+  isLoading = false; 
+  hidePassword = true;
 
   constructor(
     private authService: AuthService, 
@@ -42,25 +42,18 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-
     if (this.loginForm.invalid || this.isLoading) {
       this.loginForm.markAllAsTouched();
       return;
     }
 
-    const loginData = this.loginForm.value;
     this.isLoading = true; 
-
-    this.authService.login(loginData)
-      .pipe(
-        finalize(() => {
-          this.isLoading = false; 
-        })
-      )
+    this.authService.login(this.loginForm.value)
+      .pipe(finalize(() => this.isLoading = false))
       .subscribe({
         next: (response: AuthDto) => {
           sessionStorage.setItem('token', response.token);
-          this.router.navigate(['/home']);
+          this.router.navigate(['/furnitures']);
         },
         error: (error) => this.handleError(error)
       });
@@ -68,18 +61,14 @@ export class LoginComponent implements OnInit {
 
   private handleError(error: any) {
     const errorData = error?.error as ErrorResponse;
-
     if (errorData?.errors) {
-
-      Object.keys(errorData.errors).forEach(field => {
+      Object.entries(errorData.errors).forEach(([field, messages]) => {
         const control = this.loginForm.get(field);
         if (control) {
-          control.setErrors({ serverError: errorData.errors![field][0] });
+          control.setErrors({ serverError: messages[0] });
         }
       });
     }
-
-    this.generalErrorMessage = errorData?.message ?? '';
+    this.generalErrorMessage = errorData?.message || '';
   }
 }
-

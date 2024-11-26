@@ -36,7 +36,6 @@ public class ClassificatorController<T, TDto> : ControllerBase where T : class, 
     }
 
     [HttpPost]
-    [Authorize(Policy = "RequireAdminRole")]
     public async Task<IActionResult> Create(TDto dto)
     {
 

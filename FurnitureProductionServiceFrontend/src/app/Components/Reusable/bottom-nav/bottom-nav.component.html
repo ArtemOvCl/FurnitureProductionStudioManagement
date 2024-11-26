@@ -1,0 +1,26 @@
+<div class="bottom-nav-container">
+
+  <button (click)="toggleVisibility()" class="toggle-button">
+    <mat-icon>{{ isVisible ? 'expand_more' : 'expand_less' }}</mat-icon>
+  </button>
+
+  <div *ngIf="isVisible" class="bottom-nav">
+    <ng-container *ngFor="let link of navLinks">
+
+      <button
+        *appShowForRole="link.roles"
+        (click)="navigate(link.path)"
+        class="nav-item"
+        [ngClass]="{ 'active': router.url === link.path }"
+      >
+        <mat-icon class="nav-icon">{{ link.icon }}</mat-icon>
+        <span *ngIf="router.url === link.path" class="label">{{ link.label }}</span>
+      </button>
+    </ng-container>
+
+    <button (click)="logout()" class="nav-item">
+      <mat-icon class="nav-icon">logout</mat-icon>
+      <span *ngIf="router.url === '/login'" class="label">Logout</span>
+    </button>
+  </div>
+</div>

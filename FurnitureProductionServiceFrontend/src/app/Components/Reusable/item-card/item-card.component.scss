@@ -1,0 +1,98 @@
+.furniture-card {
+  position: relative;
+  width: 100%;
+  max-width: 300px; 
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(96, 108, 56, 0.4); /* Зелена тінь */
+  transition: box-shadow 0.2s ease;
+
+  .actions-top {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 5px;
+    z-index: 1;
+
+    .action-button {
+      width: 30px;
+      height: 30px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border: none;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 1);
+      }
+
+      img {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+
+  .furniture-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4/3; 
+    object-fit: cover;
+  }
+
+  .details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    background-color: white;
+
+    .text-details {
+      .furniture-name {
+        font-size: 16px;
+        font-weight: bold;
+        color: #606c38;
+        margin: 0;
+      }
+
+      .furniture-price {
+        font-size: 14px;
+        color: #606c38;
+        margin: 5px 0 0;
+      }
+    }
+
+    .details-button {
+      width: 35px;
+      height: 35px;
+      border: 1px solid #606c38;
+      color: #606c38;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.2s ease, color 0.2s ease;
+
+      &:hover {
+        background-color: #606c38;
+        color: white;
+
+        img {
+          filter: brightness(0) invert(1); 
+        }
+      }
+
+      img {
+        width: 18px;
+        height: 18px;
+        transition: filter 0.2s ease;
+      }
+    }
+  }
+}

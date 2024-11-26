@@ -1,0 +1,77 @@
+
+  
+  h1, h2 {
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    color: #0b3d39; 
+  }
+  
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  h2 {
+    font-size: 2.5rem; 
+    margin-top: 1rem;
+    
+    @media (max-width: 768px) {
+      font-size: 1.875rem; 
+    }
+    
+    @media (max-width: 640px) {
+      font-size: 1.5rem; 
+    }
+  }
+  
+  label {
+    font-size: 1rem; 
+    color: #0b3d39; 
+    
+  }
+  
+  input {
+    font-size: 1rem; 
+    color: #0b3d39;
+    background-color: transparent;
+  }
+  
+  button {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    transition: background-color 0.2s ease-in-out;
+    
+    &:hover {
+      background-color: #267065; 
+    }
+  }
+  
+  .general-error-message {
+    font-size: 0.875rem; 
+    color: #ff0000;
+    text-align: center;
+  }
+  
+  .error-message {
+    font-size: 0.875rem; 
+    color: #ff0000;
+  }
+  
+  .loader-icon {
+    width: 1.25rem;
+    height: 1.25rem; 
+    color: #ffffff; 
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  

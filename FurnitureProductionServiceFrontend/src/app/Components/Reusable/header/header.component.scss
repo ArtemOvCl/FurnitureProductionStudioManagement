@@ -1,0 +1,35 @@
+.page-header {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 20px;
+  
+    .header-content {
+      display: flex;
+      justify-content: space-between; 
+      align-items: center;
+    }
+  
+    .header-icon {
+      width: 50px;
+      height: 50px;
+    }
+  
+    .header-title {
+      font-size: 4rem;
+      font-family: 'Bebas Neue';
+      font-weight: bold;
+      color: #606C38;
+      margin: 0;
+      text-align: right; 
+    }
+  
+    .header-underline {
+      width: 200%; 
+      margin-left: -20px;
+      height: 2px;
+      background-color: #606C38;
+      margin-top: 10px;
+    }
+  }
+  

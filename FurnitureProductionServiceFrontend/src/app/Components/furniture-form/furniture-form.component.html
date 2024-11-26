@@ -1,0 +1,52 @@
+<div class="form-wrapper" [ngClass]="{ 'visible': isVisible }">
+  <div class="form-container">
+    <h2>{{ isEdit ? 'Edit Furniture' : 'Add Furniture' }}</h2>
+    <form (ngSubmit)="onSubmit()" #furnitureForm="ngForm">
+      <input type="hidden" [(ngModel)]="furnitureData.id" name="id" />
+      <label>
+        Name:
+        <input type="text" [(ngModel)]="furnitureData.name" name="name" required />
+      </label>
+      <label>
+        Description:
+        <textarea [(ngModel)]="furnitureData.description" name="description"></textarea>
+      </label>
+      <label>
+        Collection ID:
+        <input type="number" [(ngModel)]="furnitureData.furnitureCollectionId" name="furnitureCollectionId" />
+      </label>
+      <label>
+        Depth:
+        <input type="number" [(ngModel)]="furnitureData.depth" name="depth" />
+      </label>
+      <label>
+        Width:
+        <input type="number" [(ngModel)]="furnitureData.width" name="width" />
+      </label>
+      <label>
+        Length:
+        <input type="number" [(ngModel)]="furnitureData.length" name="length" />
+      </label>
+      <label>
+        Weight:
+        <input type="number" [(ngModel)]="furnitureData.weight" name="weight" />
+      </label>
+      <label>
+        Maximum Load:
+        <input type="number" [(ngModel)]="furnitureData.maximumLoad" name="maximumLoad" />
+      </label>
+      <label>
+        Cost:
+        <input type="number" [(ngModel)]="furnitureData.cost" name="cost" step="0.01" />
+      </label>
+      <label>
+        Image:
+        <input type="file" (change)="onFileSelected($event)" />
+      </label>
+      <div class="form-actions">
+        <button type="submit">Submit</button>
+        <button type="button" (click)="closeForm()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

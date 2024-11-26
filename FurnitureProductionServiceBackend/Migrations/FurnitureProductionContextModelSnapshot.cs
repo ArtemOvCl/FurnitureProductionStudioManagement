@@ -138,6 +138,9 @@ namespace FurnitureProductionServiceBackend.Migrations
                     b.Property<int>("FurnitureCollectionId")
                         .HasColumnType("int");
 
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("Length")
                         .HasColumnType("float");
 
@@ -270,6 +273,9 @@ namespace FurnitureProductionServiceBackend.Migrations
 
                     b.Property<decimal>("Cost")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MaterialComponents")
                         .IsRequired()

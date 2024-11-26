@@ -31,8 +31,8 @@
     padding-left: 0.5rem;
   }
   
-  input:focus + .floating-label,
-  input:not(:placeholder-shown) + .floating-label {
+  input:focus ~ .floating-label,
+  input:not(:placeholder-shown) ~ .floating-label {
     top: 0;
     transform: translateY(-60%);
     font-size: 0.75rem;

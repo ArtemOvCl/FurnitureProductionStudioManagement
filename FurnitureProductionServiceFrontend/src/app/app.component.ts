@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HomeComponent } from './Components/home/home.component';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from './Services/auth.service';
 
 @Component({
   selector: 'app-root',

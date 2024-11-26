@@ -1,12 +1,53 @@
-<div class="min-h-screen flex flex-col">
-    <header class="text-2xl font-bold text-center my-4 text-green-dark-800">
-      Furniture Management
-    </header>
-    
-    <div class="flex-grow p-4 text-center">
-      <p>Here you can manage all furniture-related tasks.</p>
+<div class="min-h-screen flex flex-col overflow-x-hidden animated-background">
+
+  <app-header [title]="'FURNITURES'"></app-header>
+
+  <div class="main-container">
+    <app-furniture-form
+      [isVisible]="isFormVisible"
+      [isEdit]="isFormEdit"
+      [furnitureData]="selectedFurniture"
+      (close)="closeForm()"
+      (submit)="handleFormSubmission($event)"
+    ></app-furniture-form>
+
+    <div class="actions-container">
+      <app-search-field
+        [placeholder]="'Cool Sofa...'"
+        (search)="handleSearch()"
+      ></app-search-field>
+
+      <app-sort-field
+        [label]="'Sort by'"
+        (sort)="handleSort()"
+      ></app-sort-field>
+
+      <app-filter-field
+        [label]="'Collection'"
+        (filter)="handleFilter()"
+      ></app-filter-field>
+
+      <app-add-item-button
+        [iconPath]="'assets/icons/add.png'"
+        (clickAdd)="handleAdd()"
+      ></app-add-item-button>
     </div>
-  
-    <app-bottom-nav [role]="userRole  || ''"></app-bottom-nav>
+
+    <div class="list-container">
+
+      <div *ngIf="isLoading" class="loading-spinner">
+        <img src="assets/icons/spinner.gif" alt="Loading..." />
+      </div>
+
+      <app-item-list
+        *ngIf="!isLoading"
+        [items]="furnitureList"
+        (edit)="handleEdit($event)"
+        (delete)="handleDelete($event)"
+        (details)="handleDetails($event)"
+      ></app-item-list>
+    </div>
   </div>
-  
+</div>
+
+<app-bottom-nav></app-bottom-nav>

@@ -305,3 +305,4 @@ C:\Users\artem\OneDrive\Документы\GitHub\FurnitureProductionStudioManag
 C:\Users\artem\OneDrive\Документы\GitHub\FurnitureProductionStudioManagement\FurnitureProductionServiceBackend\obj\Debug\net8.0\Furnitur.DFDEEB58.Up2Date
 C:\Users\artem\OneDrive\Документы\GitHub\FurnitureProductionStudioManagement\FurnitureProductionServiceBackend\obj\Debug\net8.0\FurnitureProductionServiceBackend.genruntimeconfig.cache
 C:\Users\artem\OneDrive\Документы\GitHub\FurnitureProductionStudioManagement\FurnitureProductionServiceBackend\obj\Debug\net8.0\ref\FurnitureProductionServiceBackend.dll
+C:\Users\artem\OneDrive\Документы\GitHub\FurnitureProductionStudioManagement\FurnitureProductionServiceBackend\bin\Debug\net8.0\FurnitureProductionServiceBackend.staticwebassets.runtime.json

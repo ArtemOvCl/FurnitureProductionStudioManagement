@@ -30,6 +30,8 @@ builder.Services.AddScoped(typeof(IClassificatorRepository<>), typeof(Classifica
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<IManufactureRepository, ManufactureRepository>();
+builder.Services.AddScoped<IFurnitureRepository, FurnitureRepository>();
+builder.Services.AddScoped<IMaterialRepository, MaterialRepository>();
 
 builder.Services.AddControllers();
 
@@ -58,6 +60,8 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+
+builder.WebHost.UseWebRoot("wwwroot");
 
 builder.Services.AddAutoMapper(typeof(Program));
 
@@ -91,6 +95,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseStaticFiles();
 
 app.UseHttpsRedirection();
 

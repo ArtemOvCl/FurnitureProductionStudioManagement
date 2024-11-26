@@ -19,6 +19,12 @@ namespace FurnitureProductionServiceBackend
             CreateMap<User, UserCreateDto>().ReverseMap();
             CreateMap<User, UserLoginDto>().ReverseMap();
             CreateMap<Manufacture, ManufactureDto>().ReverseMap();
+
+            CreateMap<Furniture, FurnitureDto>().ReverseMap();
+
+            CreateMap<Furniture, FurnitureItemDto>().ReverseMap();
+
+            CreateMap<Material, MaterialDto>().ReverseMap();
         }
     }
 }

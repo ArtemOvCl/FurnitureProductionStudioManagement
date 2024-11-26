@@ -1,0 +1,10 @@
+<div class="item-list">
+    <app-item-card
+      *ngFor="let item of items"
+      [data]="item"
+      (edit)="handleEdit(item.id)"
+      (delete)="handleDelete(item.id)"
+      (details)="handleDetails(item.id)"
+    ></app-item-card>
+  </div>
+  
