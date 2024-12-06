@@ -20,6 +20,10 @@ export class FurnitureFormComponent implements OnChanges {
   selectedFile: File | null = null;
 
   ngOnChanges(): void {
+    console.log('ngOnChanges triggered');
+  console.log('isVisible:', this.isVisible);
+  console.log('isEdit:', this.isEdit);
+
     if (!this.furnitureData) {
       this.furnitureData = {
         id: null,
@@ -49,8 +53,6 @@ export class FurnitureFormComponent implements OnChanges {
     if (this.selectedFile) {
       formData.append('imageFile', this.selectedFile);
     }
-
-    console.log('formData instanceof FormData:', formData instanceof FormData);
 
     this.submit.emit(formData); 
   }

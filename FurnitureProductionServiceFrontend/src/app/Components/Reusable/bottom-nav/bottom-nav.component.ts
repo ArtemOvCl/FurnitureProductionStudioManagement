@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../../../Services/auth.service';
 
 import { NavLink } from '../../../Interfaces/nav-link';
-import { ShowForRoleDirective } from '../../../directives/show-for-role.directive';
+import { ShowForRoleDirective } from '../../../directives/ShowForRole/show-for-role.directive';
 
 @Component({
   selector: 'app-bottom-nav',

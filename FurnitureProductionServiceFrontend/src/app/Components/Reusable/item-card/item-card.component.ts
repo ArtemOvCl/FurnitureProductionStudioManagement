@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { FurnitureItem } from '../../../Interfaces/furniture-item';
-import { ShowForRoleDirective } from '../../../directives/show-for-role.directive';
+import { ShowForRoleDirective } from '../../../directives/ShowForRole/show-for-role.directive';
 
 @Component({
   selector: 'app-item-card',

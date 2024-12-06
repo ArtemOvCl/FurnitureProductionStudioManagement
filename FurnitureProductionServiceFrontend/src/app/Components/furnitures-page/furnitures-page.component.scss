@@ -28,3 +28,28 @@ header {
   .actions-container > :last-child {
     margin-left: auto; 
   }
+
+  .content-container {
+    position: relative;
+  }
+
+  .details-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.95);
+    z-index: 9999;
+    overflow-y: auto;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+  }
+
+  .details-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }

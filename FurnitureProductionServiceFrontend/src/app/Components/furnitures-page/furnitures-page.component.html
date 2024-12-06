@@ -1,8 +1,7 @@
-<div class="min-h-screen flex flex-col overflow-x-hidden animated-background">
-
+<div class="page-container">
   <app-header [title]="'FURNITURES'"></app-header>
 
-  <div class="main-container">
+  <div class="content-container">
     <app-furniture-form
       [isVisible]="isFormVisible"
       [isEdit]="isFormEdit"
@@ -34,7 +33,6 @@
     </div>
 
     <div class="list-container">
-
       <div *ngIf="isLoading" class="loading-spinner">
         <img src="assets/icons/spinner.gif" alt="Loading..." />
       </div>
@@ -47,7 +45,11 @@
         (details)="handleDetails($event)"
       ></app-item-list>
     </div>
-  </div>
-</div>
 
-<app-bottom-nav></app-bottom-nav>
+    <div class="details-overlay" [ngClass]="{'active': isDetailsActive}">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+  <app-bottom-nav></app-bottom-nav>
+</div>

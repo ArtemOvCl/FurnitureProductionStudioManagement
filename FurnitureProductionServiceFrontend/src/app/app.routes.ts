@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './Components/home/home.component';
 import { NotFoundComponent } from './Components/not-found/not-found.component';
 import { FurnituresPageComponent } from './Components/furnitures-page/furnitures-page.component';
 import { FurnitureDetailsComponent } from './Components/furniture-details/furniture-details.component';
@@ -18,13 +17,15 @@ export const routes: Routes = [
     path: 'furnitures',
     component: FurnituresPageComponent,
     canActivate: [AuthGuard],
-    data: { roles: ['Admin', 'Common', 'Logistician'] }, 
-  },
-  {
-    path: 'furniture/:id',
-    component: FurnitureDetailsComponent,
-    canActivate: [AuthGuard],
     data: { roles: ['Admin', 'Common', 'Logistician'] },
+    children: [
+      {
+        path: ':id',
+        component: FurnitureDetailsComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['Admin', 'Common', 'Logistician'] },
+      },
+    ],
   },
   { path: '**', component: NotFoundComponent },
 ];

@@ -10,7 +10,8 @@ import { FilterFieldComponent } from '../Reusable/filter-field/filter-field.comp
 import { AddItemButtonComponent } from '../Reusable/add-item-button/add-item-button.component';
 import { FurnitureFormComponent } from '../furniture-form/furniture-form.component';
 import { BottomNavComponent } from '../Reusable/bottom-nav/bottom-nav.component';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-furnitures-page',
@@ -27,6 +28,7 @@ import { Router } from '@angular/router';
     AddItemButtonComponent,
     FurnitureFormComponent,
     BottomNavComponent,
+    RouterOutlet
   ],
 })
 export class FurnituresPageComponent implements OnInit {
@@ -36,14 +38,25 @@ export class FurnituresPageComponent implements OnInit {
   isLoading: boolean = true;
   selectedFurniture: FurnitureItem | null = null;
 
+  isDetailsActive: boolean = false;
+
   constructor(private furnitureService: FurnitureService, private router: Router) {}
 
   ngOnInit(): void {
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: any) => {
+        const url = event.urlAfterRedirects;
+
+        if (url === '/furnitures') {
+          this.isDetailsActive = false; 
+        }
+      });
     this.loadFurniture();
   }
 
   loadFurniture(): void {
-    this.isLoading = true; // Початок завантаження
+    this.isLoading = true; 
     this.furnitureService.getAllFurnitures().subscribe({
       next: (data) => {
         this.furnitureList = data;
@@ -59,6 +72,7 @@ export class FurnituresPageComponent implements OnInit {
   handleAdd(): void {
     this.isFormVisible = true;
     this.isFormEdit = false;
+    console.log(this.isFormVisible);
   }
 
   handleEdit(id: number): void {
@@ -108,12 +122,13 @@ export class FurnituresPageComponent implements OnInit {
   }
 
   handleFilter(): void {}
-
   handleSort(): void {}
-
   handleSearch(): void {}
 
   handleDetails(id: number): void {
-    this.router.navigate(['/furniture', id]);
+    console.log("povtorka");
+
+    this.isDetailsActive = true;
+    this.router.navigate(['/furnitures', id]);
   }
 }

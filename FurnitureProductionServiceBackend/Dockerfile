@@ -13,6 +13,6 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build /out .
 
-EXPOSE 5000
+EXPOSE 5221
 
 ENTRYPOINT ["dotnet", "FurnitureProductionServiceBackend.dll"]

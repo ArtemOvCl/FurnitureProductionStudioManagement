@@ -10,6 +10,7 @@ import { FurnitureItem } from '../../../Interfaces/furniture-item';
   templateUrl: './item-list.component.html',
   styleUrls: ['./item-list.component.scss'],
 })
+
 export class ItemListComponent {
   @Input() items: FurnitureItem[] = [];
 
@@ -18,7 +19,6 @@ export class ItemListComponent {
   @Output() details = new EventEmitter<number>();
 
   handleEdit(id: number): void {
-    console.log("fwgwgr");
     this.edit.emit(id);
   }
 

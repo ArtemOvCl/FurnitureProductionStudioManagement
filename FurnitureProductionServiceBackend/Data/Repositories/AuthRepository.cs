@@ -27,7 +27,6 @@ namespace FurnitureProductionServiceBackend.Repositories
             var response = new AuthResponseDto { Success = false };
             var errors = new Dictionary<string, List<string>>();
 
-            // Перевірка, чи всі необхідні поля заповнені
             if (string.IsNullOrWhiteSpace(loginDto.Name))
             {
                 errors.Add("name", new List<string> { "Full Name is required." });
