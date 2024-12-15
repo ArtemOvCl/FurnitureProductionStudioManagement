@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  frontend:
+    build: 
+      context: ./
+      dockerfile: ./FurnitureProductionServiceFrontend/Dockerfile
+    ports:
+      - "4200:80" 
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  backend:
+    build: ./FurnitureProductionServiceBackend
+    ports:
+      - "5221:5221" 
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

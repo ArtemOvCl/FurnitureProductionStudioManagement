@@ -43,6 +43,7 @@ export class FurnituresPageComponent implements OnInit {
   constructor(private furnitureService: FurnitureService, private router: Router) {}
 
   ngOnInit(): void {
+    
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: any) => {
@@ -52,6 +53,7 @@ export class FurnituresPageComponent implements OnInit {
           this.isDetailsActive = false; 
         }
       });
+
     this.loadFurniture();
   }
 

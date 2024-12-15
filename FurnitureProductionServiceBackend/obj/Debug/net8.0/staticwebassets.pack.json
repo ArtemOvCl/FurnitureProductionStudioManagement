@@ -1,12 +1,16 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\artem\\OneDrive\\Документы\\GitHub\\FurnitureProductionStudioManagement\\FurnitureProductionServiceBackend\\wwwroot\\images\\furniture\\2c750cac-5ed2-4e93-987d-3c9a22366be9.jpg",
-      "PackagePath": "staticwebassets\\images\\furniture\\2c750cac-5ed2-4e93-987d-3c9a22366be9.jpg"
-    },
-    {
       "Id": "C:\\Users\\artem\\OneDrive\\Документы\\GitHub\\FurnitureProductionStudioManagement\\FurnitureProductionServiceBackend\\wwwroot\\images\\furniture\\3da4b8f3-1770-46ae-9612-a632f387c04f.jpg",
       "PackagePath": "staticwebassets\\images\\furniture\\3da4b8f3-1770-46ae-9612-a632f387c04f.jpg"
+    },
+    {
+      "Id": "C:\\Users\\artem\\OneDrive\\Документы\\GitHub\\FurnitureProductionStudioManagement\\FurnitureProductionServiceBackend\\wwwroot\\images\\furniture\\4fbd2d59-312a-44e5-b518-4cb7dbd8c73a.jfif",
+      "PackagePath": "staticwebassets\\images\\furniture\\4fbd2d59-312a-44e5-b518-4cb7dbd8c73a.jfif"
+    },
+    {
+      "Id": "C:\\Users\\artem\\OneDrive\\Документы\\GitHub\\FurnitureProductionStudioManagement\\FurnitureProductionServiceBackend\\wwwroot\\images\\furniture\\84125ab8-c8e2-4efe-a2c0-22ad58d6e974.jpg",
+      "PackagePath": "staticwebassets\\images\\furniture\\84125ab8-c8e2-4efe-a2c0-22ad58d6e974.jpg"
     },
     {
       "Id": "C:\\Users\\artem\\OneDrive\\Документы\\GitHub\\FurnitureProductionStudioManagement\\FurnitureProductionServiceBackend\\wwwroot\\images\\furniture\\8db87830-7e42-461d-b3b0-220f61eff6f4.png",
